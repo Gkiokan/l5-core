@@ -1,0 +1,93 @@
+/*
+    Start with basic DOM Properties
+*/
+html, body {
+    // background: $body_bg;
+    // color: $body_color;
+    position: relative;
+
+    // font-size: $body_font_size;
+    // line-height: $body_line_height;
+    // font-family: 'Open Sans', sans-serif;
+}
+
+// content
+.content {
+    font-size: 1.8rem;
+    line-height: 2.8rem;
+}
+
+
+// Navbar clean up
+.navbar-default .navbar-toggle {
+    border: none;
+}
+
+/*
+  Links
+*/
+a {
+    color: #222;
+    position: relative;
+    border-bottom:0px solid dimgray;
+    text-decoration: none !important;
+    transition: all .4s;
+
+    &:hover {
+        color: deepskyblue;
+        border-bottom:0px solid crimson;
+    }
+
+}
+
+
+/*
+    Button resets
+*/
+.btn, a, input { outline: none !important; }
+.noborder { border: none; }
+
+/*
+  Spacer elements
+*/
+.space { height: 300px; display:block; }
+
+
+/*
+    Vertical align centered
+*/
+.vcenter {
+    display: table;
+    width: 100%;
+    position: relative;
+
+    > div,
+    > article,
+    > section {
+        display: table-cell;
+        width: 100%;
+        vertical-align: middle;
+    }
+}
+
+/*
+    Hight classes
+*/
+.fullheight { height: 100vh; }
+.halfheight { height: 50vh; }
+
+
+
+
+/*
+    No select
+*/
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Chrome/Safari/Opera */
+     -khtml-user-select: none; /* Konqueror */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  not supported by any browser */
+}

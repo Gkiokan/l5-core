@@ -1,0 +1,24 @@
+.alert, .form-control {
+    border-radius: 0;
+}
+
+.alert {
+    &.notfound,
+    &.alert-danger {
+        background: crimson;
+        color: seashell;
+    }
+
+    &.found,
+    &.alert-success {
+        background: forestgreen;
+        color: floralwhite;
+    }
+
+    &.info,
+    &.alert-info {
+        background: deepskyblue;
+        color: floralwhite;
+    }
+
+}
