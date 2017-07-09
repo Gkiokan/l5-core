@@ -124,7 +124,7 @@ export default function (vue) {
             Login wrapper
         */
         login(data, cb){
-            cb.that.$store.dispatch('login', cb)
+            cb.that.$store.dispatch('ui/login', cb)
         },
 
 
@@ -151,7 +151,7 @@ export default function (vue) {
             Logout Wrappers
         */
         logout(obj){
-            obj.that.$store.dispatch('logout', obj)
+            obj.that.$store.dispatch('ui/logout', obj)
         },
 
 
@@ -173,8 +173,10 @@ export default function (vue) {
             Initial Check method for disptaching user statement
         */
         checkuser(obj){
+            this.log('Checking User Object ')
+
             if(obj.$auth.isAuthenticated())
-            obj.$store.dispatch('checkuser', {
+            obj.$store.dispatch('ui/checkuser', {
                 that: obj
             })
         },
