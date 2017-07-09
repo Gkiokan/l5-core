@@ -8,12 +8,19 @@ export default function (vue) {
         name : '::Auth | ',
         debug : true,
 
+        /*
+            Set all nessesary tokens
+        */
         setToken (token, refresh, exp) {
             localStorage.setItem('token', token)
             localStorage.setItem('refresh', refresh)
             localStorage.setItem('expiration', exp)
         },
 
+
+        /*
+            get auth Token
+        */
         getToken () {
             var token = localStorage.getItem('token')
             var exp   = localStorage.getItem('expiration')
@@ -29,45 +36,79 @@ export default function (vue) {
             return token
         },
 
+
+        /*
+            get Refresh token
+        */
         getRefreshToken(){
             return localStorage.getItem('refresh') || null;
         },
 
-        destroyToken () {
+
+        /*
+            destroy all tokens
+        */
+        destroyToken() {
             localStorage.removeItem('token')
             localStorage.removeItem('expiration')
             // localStorage.removeItem('refresh')
         },
 
 
+        /*
+            Is user authenticated
+        */
         isAuthenticated () {
             return this.getToken() ? true : false
         },
 
 
+        /*
+            Get a Auth Header Object for header preparation
+        */
         getAuthHeader() {
             return { 'Authorization': 'Bearer ' + this.getToken() }
         },
 
+
+        /*
+            Set the HTTP header globally
+        */
         setAuthHeader() {
             window.axios.defaults.headers.common['Authorization'] = this.getAuthHeader().Authorization
         },
 
+
+        /*
+            Set User Data by data
+        */
         setLoginData(data){
             this.setToken(data.access_token, data.refresh_token, data.expires_in + Date.now())
             this.setUserObject()
         },
 
+
+        /*
+            Get saved user
+        */
         getUser() {
             return user;
         },
 
+
+        /*
+            Save the user Object
+        */
         setUser(u) {
             user = u
             this.log('Set User')
             console.log(u)
         },
 
+
+        /*
+            Set user Object wrapper
+        */
         setUserObject(){
             if(this.isAuthenticated()){
                 this.log("User is already Authenticated")
@@ -79,10 +120,17 @@ export default function (vue) {
         },
 
 
+        /*
+            Login wrapper
+        */
         login(data, cb){
             cb.that.$store.dispatch('login', cb)
         },
 
+
+        /*
+            Refresh User Login by refresh token
+        */
         refresh(){
             var data = {
                client_id: 2,
@@ -98,26 +146,46 @@ export default function (vue) {
                  })
         },
 
+
+        /*
+            Logout Wrappers
+        */
         logout(obj){
             obj.that.$store.dispatch('logout', obj)
         },
 
+
+        /*
+            Request the current user Object and set user in $auth
+        */
         requestUserObject(){
-            this.log('Setting up the user object')
-            axios.get('/api/user')
+            this.log('Request User Object')
+
+            if(this.isAuthenticated())
+              axios.get('/api/user')
                  .then( r =>  this.setUser(r.data) )
+            else
+              this.log('Requset user Object cannot be run because no User is auth.')
         },
 
-        log(m){
-            if(this.debug)
-            console.log(this.name + m)
-        },
 
+        /*
+            Initial Check method for disptaching user statement
+        */
         checkuser(obj){
             if(obj.$auth.isAuthenticated())
             obj.$store.dispatch('checkuser', {
                 that: obj
             })
+        },
+
+
+        /*
+            Log helper
+        */
+        log(m){
+            if(this.debug)
+            console.log(this.name + m)
         }
 
     }
