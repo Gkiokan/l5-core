@@ -89,10 +89,9 @@ export default {
                       refresh: r.data.refresh_token,
                       exp: r.data.expires_in + Date.now()
                    })
-               })
-               .then( () => {
-                  axios.get('/api/user').then( r => commit('LOGIN', r.data) )
-                  obj.cb()
+
+                   axios.get('/api/user').then( r => commit('LOGIN', r.data) )
+                   obj.cb()
                })
       },
 

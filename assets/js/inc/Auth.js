@@ -2,7 +2,8 @@
     Auth
 */
 export default function (vue) {
-    let user = null;
+    let user  = null;
+    let store = null;
 
     Vue.auth = {
         name : '::Auth | ',
@@ -49,8 +50,10 @@ export default function (vue) {
             destroy all tokens
         */
         destroyToken() {
-            localStorage.removeItem('token')
-            localStorage.removeItem('expiration')
+            this.log('Destroy that thing')
+            store.commit('ui/LOGOUT')
+            // localStorage.removeItem('token')
+            // localStorage.removeItem('expiration')
             // localStorage.removeItem('refresh')
         },
 
@@ -179,6 +182,14 @@ export default function (vue) {
             obj.$store.dispatch('ui/checkuser', {
                 that: obj
             })
+        },
+
+
+        /*
+            Set Store (quick and dirty)
+        */
+        setStore(s){
+            store = s
         },
 
 

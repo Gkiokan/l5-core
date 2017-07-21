@@ -37,7 +37,7 @@ var Interceptors = {
 
               if(status == 401){
                   swal(status.toString(), error.response.data.message || error.response.data.error, 'error')
-                  Vue.auth.destroyToken()
+                  // Vue.auth.destroyToken()
               }
 
               if(status == 500){
