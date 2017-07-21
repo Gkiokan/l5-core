@@ -34,6 +34,7 @@ class CoreServiceProvider extends ServiceProvider
     public function register()
     {
         //
+        include_once __DIR__ . '/../start.php';
     }
 
     /**
